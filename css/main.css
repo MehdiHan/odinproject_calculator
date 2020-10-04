@@ -1,0 +1,82 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 100%;
+}
+body {
+  color: #fafffd;
+  background-color: #1d1f20;
+  font-family: 'Oswald', sans-serif;
+}
+header,
+footer {
+  min-height: 5vh;
+}
+footer {
+  text-align: center;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+}
+h1 {
+  padding: 10px 0 0 20px;
+  font-size: 1.25rem;
+}
+a {
+  text-decoration: none;
+  color: #f0db4e;
+}
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: #ffffff;
+  background-color: #303234;
+  box-shadow: inset 0px 0px 2px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 400ms;
+}
+button:hover {
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 400ms;
+}
+.calculator__container {
+  max-width: 80%;
+  margin: 50px auto;
+}
+.calculator__keyboard {
+  display: flex;
+}
+.calculator__display {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 380px;
+  height: 120px;
+  padding-right: 20px;
+  background-color: #303234;
+}
+.calculator__keyboard__numbers {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.calculator__keyboard__numbers button {
+  width: 100px;
+  height: 100px;
+}
+.calculator__keyboard__operators {
+  display: grid;
+}
+.calculator__keyboard__operators button {
+  width: 80px;
+  height: 80px;
+}
+.language__color {
+  color: #f0db4e;
+}
