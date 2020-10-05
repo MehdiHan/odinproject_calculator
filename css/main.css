@@ -75,7 +75,7 @@ button:hover {
 }
 .calculator__keyboard__operators button {
   width: 80px;
-  height: 80px;
+  height: 66.67px;
 }
 .language__color {
   color: #f0db4e;
