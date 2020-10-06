@@ -48,10 +48,26 @@ const operate = (a, b, operator) => {
   return operator(a, b);
 };
 
-console.log(buttons);
-
 buttons.forEach((button) => {
   button.addEventListener('click', function (event) {
-    displayResult.innerText = event.target.dataset.value;
+    displayResult.innerText += event.target.dataset.value;
+
+    // Clear the displayed value
+    if (event.target.dataset.value === 'clear') {
+      displayResult.innerText = '';
+    }
+
+    // test a number sign a change it
+    if (event.target.dataset.value === '+/-') {
+      // Need to check if string contain dot to parseFloat ?
+      let stringToNumber = Number.parseInt(displayResult.innerText, 10);
+      console.log(stringToNumber);
+      if (Math.sign(stringToNumber) === 1) {
+        displayResult.innerText = `-${stringToNumber}`;
+      }
+      if (Math.sign(stringToNumber) === -1) {
+        displayResult.innerText = Math.abs(stringToNumber);
+      }
+    }
   });
 });
