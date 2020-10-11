@@ -1,6 +1,7 @@
 const buttons = document.querySelectorAll('[data-value]');
 const equal = document.querySelector('[data-key=equal]');
 const displayResult = document.getElementById('displayResult');
+let memoryPoint = '';
 
 /**
  * Returns the operation to a and b
@@ -64,26 +65,21 @@ buttons.forEach((button) => {
       displayResult.innerText = '';
     }
 
-    // test a number sign a change it
-    if (event.target.dataset.value === '+/-') {
-      // Need to check if string contain dot to parseFloat ?
-      let stringToNumber = Number.parseInt(displayResult.innerText, 10);
-      console.log(stringToNumber);
-      if (Math.sign(stringToNumber) === 1) {
-        displayResult.innerText = `-${stringToNumber}`;
-      }
-      if (Math.sign(stringToNumber) === -1) {
-        displayResult.innerText = Math.abs(stringToNumber);
-      }
+    if (event.target.dataset.type === 'operator') {
+      console.log(displayResult.innerText, memoryPoint);
+      memoryPoint += displayResult.innerText;
+      displayResult.innerText = '';
     }
   });
 });
 
 equal.addEventListener('click', function (event) {
-  let string = returnNumbers(displayResult.innerText);
+  let calc = memoryPoint + displayResult.innerText;
+  let string = returnNumbers(calc);
   let a = Number.parseFloat(string[0], 10);
   let b = Number.parseFloat(string[1], 10);
   let operator = string[2];
   let result = operate(a, b, operator);
   displayResult.innerText = result;
+  memoryPoint = '';
 });
