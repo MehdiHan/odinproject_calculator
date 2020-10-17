@@ -38,16 +38,17 @@ const operate = (a, b, operator) => {
 const returnNumbers = (string) => {
   let index = '';
   let operator = '';
-  if (string.includes('+')) {
-    index = string.indexOf('+');
-    operator = 'add';
-  }
+
   if (string.includes('-')) {
     if (string.indexOf('-') !== 0) {
       index = string.indexOf('-');
     }
     index = string.lastIndexOf('-');
     operator = 'subtract';
+  }
+  if (string.includes('+')) {
+    index = string.indexOf('+');
+    operator = 'add';
   }
   if (string.includes('*')) {
     index = string.indexOf('*');
