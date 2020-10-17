@@ -2,6 +2,7 @@ const buttons = document.querySelectorAll('[data-value]');
 const equal = document.querySelector('[data-key=equal]');
 const displayResult = document.getElementById('displayResult');
 let memoryPoint = '';
+let countDot = 0;
 
 /**
  * Returns the operation to a and b
@@ -20,7 +21,11 @@ const operate = (a, b, operator) => {
     result = a * b;
   }
   if (operator === 'divide') {
-    result = a / b;
+    if (b === 0) {
+      result = `Error ! Do not try to divide by 0`;
+    } else {
+      result = a / b;
+    }
   }
   return result;
 };
@@ -38,7 +43,10 @@ const returnNumbers = (string) => {
     operator = 'add';
   }
   if (string.includes('-')) {
-    index = string.indexOf('-');
+    if (string.indexOf('-') !== 0) {
+      index = string.indexOf('-');
+    }
+    index = string.lastIndexOf('-');
     operator = 'subtract';
   }
   if (string.includes('*')) {
@@ -65,8 +73,26 @@ buttons.forEach((button) => {
       displayResult.innerText = '';
     }
 
+    // Count when . key is pressed, if already pressed clear the screen
+    if (event.target.dataset.value === '.') {
+      countDot++;
+      if (countDot > 1) {
+        displayResult.innerText = '';
+        countDot = 0;
+      }
+    }
+
+    // When you press +/- key, change the number's sign
+    if (event.target.dataset.key === '+/-') {
+      let number = displayResult.innerText;
+      if (number.includes('-')) {
+        displayResult.innerText = number.replace('-', '');
+      } else {
+        displayResult.innerText = '-' + number;
+      }
+    }
+
     if (event.target.dataset.type === 'operator') {
-      console.log(displayResult.innerText, memoryPoint);
       memoryPoint += displayResult.innerText;
       displayResult.innerText = '';
     }
@@ -78,6 +104,7 @@ equal.addEventListener('click', function (event) {
   let string = returnNumbers(calc);
   let a = Number.parseFloat(string[0], 10);
   let b = Number.parseFloat(string[1], 10);
+  console.log(a, b);
   let operator = string[2];
   let result = operate(a, b, operator);
   displayResult.innerText = result;
